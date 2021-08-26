@@ -1,0 +1,11 @@
+.tippy-box[data-theme~='custom-dark'] {
+  background-color: #1A1338;
+  color: #A8A8C4;
+  padding: 0.25rem 0.25rem;
+  border: 1px solid #2F2650;
+  border-radius: 0.125rem;
+}
+
+.tippy-box[data-theme~='custom-dark'] .tippy-arrow {
+  color: #1A1338;
+}
