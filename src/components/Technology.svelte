@@ -1,16 +1,48 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import tippy from 'tippy.js';
+  import { onMount } from "svelte";
+  import tippy from "tippy.js";
 
-  export let active: boolean = false;
+  const TECH_BORDER = 2;
+  const TECH_RADIUS = 30;
+  const RADIUS: number = 125;
+  const offset: number = RADIUS - (TECH_RADIUS + TECH_BORDER / 2);
+  const X_PI4: number = offset + RADIUS * Math.cos(Math.PI / 4);
+  const Y_PI4: number = offset - RADIUS * Math.sin(Math.PI / 4);
+  const X_3PI4: number = offset + RADIUS * Math.cos((3 * Math.PI) / 4);
+  const Y_3PI4: number = offset - RADIUS * Math.sin((3 * Math.PI) / 4);
+
   export let name: string;
   export let moreClass: string;
   export let icon: string;
-
+  export let position: string;
+  export let active: boolean = false;
+  export let repository: string | undefined = undefined;
+  const user = repository ? repository.split("/")[0] : undefined;
+  const repo = repository ? repository.split("/")[1] : undefined;
   export let top: number | undefined = undefined;
   export let left: number | undefined = undefined;
   export let right: number | undefined = undefined;
   export let bottom: number | undefined = undefined;
+
+  if (position === "top-left") {
+    top = Y_3PI4;
+    left = X_3PI4;
+  }
+
+  if (position === "top-right") {
+    top = Y_PI4;
+    left = X_PI4;
+  }
+
+  if (position === "bottom-left") {
+    bottom = Y_3PI4;
+    left = X_3PI4;
+  }
+
+  if (position === "bottom-right") {
+    left = X_PI4;
+    bottom = Y_PI4;
+  }
 
   let styleTop = `top: ${top}px;`;
   let styleLeft = `left: ${left}px;`;
@@ -22,88 +54,108 @@
   onMount(() => {
     tippy(tippyTrigger, {
       allowHTML: true,
-      theme: 'custom-dark',
+      trigger: "click",
+      theme: "custom-dark",
+      interactive: true,
       arrow: true,
+      appendTo: document.body,
       content: `
         <div>
-          <div class="flex items-center mb-2">
-            <img src="/images/icons/${icon}" class="filter drop-shadow" width="36" alt="${name}" />
-            <h1 class="text-lg ml-4 uppercase" style="color: #bd9e59;">${name}</h1>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center">
+              <img src="/images/icons/${icon}" class="filter drop-shadow" width="36" alt="${name}" />
+              <h1 class="text-lg ml-4 font-semibold uppercase" style="color: #bd9e59;">${name}</h1>
+            </div>
+            ${
+              user && repo
+                ? `<iframe src="https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true" frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`
+                : ""
+            }
           </div>
           <span class="text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
         </div>`,
-      trigger: 'click',
     });
   });
 </script>
 
-<div bind:this="{tippyTrigger}" class="{moreClass} circle-container flex items-center justify-center"
+<div
+  bind:this={tippyTrigger}
+  class="{moreClass} {position} circle-container flex items-center justify-center"
   style="
-    { top ? styleTop : "" }
-    { left ? styleLeft : "" }
-    { right ? styleRight : "" }
-    { bottom ? styleBottom : "" }
+    {top ? styleTop : ''}
+    {left ? styleLeft : ''}
+    {right ? styleRight : ''}
+    {bottom ? styleBottom : ''}
   "
 >
-  <div class="circle filter drop-shadow-xl shadow-md flex items-center justify-center {active ? 'circle-active' : ''}">
-    <img src="/images/icons/{icon}" class="filter drop-shadow" width="20" alt="{name}" />
+  <div
+    class="circle filter drop-shadow-xl shadow-md flex items-center justify-center {active
+      ? 'circle-active'
+      : ''}"
+  >
+    <img
+      src="/images/icons/{icon}"
+      class="filter drop-shadow"
+      width="20"
+      alt={name}
+    />
   </div>
 </div>
 
 <style>
-  .top {
+  :global(.top) {
     position: absolute;
     top: 0.25rem;
     transform: translateX(-50%);
     left: 50%;
   }
 
-  .bottom {
+  :global(.bottom) {
     position: absolute;
     bottom: 0.25rem;
     transform: translateX(-50%);
     left: 50%;
   }
 
-  .top-left {
+  :global(.top-left) {
     position: absolute;
-    margin-top: calc(32px/2 + 0.5rem);
-    margin-left: calc(32px/2 + 0.5rem);
+    margin-top: calc(32px / 2 + 0.5rem);
+    margin-left: calc(32px / 2 + 0.5rem);
   }
 
-  .left {
+  :global(.left) {
     position: absolute;
     left: 0.25rem;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  .bottom-left {
+  :global(.bottom-left) {
     position: absolute;
     left: 0rem;
     bottom: 0rem;
-    margin-bottom: calc(32px/2 + 0.5rem);
-    margin-left: calc(32px/2 + 0.5rem);
+    margin-bottom: calc(32px / 2 + 0.5rem);
+    margin-left: calc(32px / 2 + 0.5rem);
   }
 
-  .top-right {
-    margin-top: calc(32px/2 + 0.5rem);
-    margin-left: calc(-32px/2 - 0.5rem);
+  :global(.top-right) {
+    margin-top: calc(32px / 2 + 0.5rem);
+    margin-left: calc(-32px / 2 - 0.5rem);
     position: absolute;
     right: 0rem;
     top: 0rem;
   }
 
-  .right {
+  :global(.right) {
     position: absolute;
     right: 0.25rem;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  .bottom-right {
-    margin-bottom: calc(32px/2 + 0.5rem);
-    margin-left: calc(-32px/2 - 0.5rem);
+  :global(.bottom-right) {
+    margin-bottom: calc(32px / 2 + 0.5rem);
+    margin-left: calc(-32px / 2 - 0.5rem);
     position: absolute;
     right: 0rem;
     bottom: 0rem;
