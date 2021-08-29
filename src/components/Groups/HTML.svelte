@@ -4,14 +4,16 @@
   
   export let name: string = "";
   export let icon: string;
+  export let links: boolean[] = [false, false, false, false];
+  export let linkHeight: number = 9.37;
 </script>
 
-<Group {name} {icon}>
+<Group {name} {icon} {links} {linkHeight}>
   <Technology
-  moreClass="absolute"
-  position="top"
-  active={true}
-  name="HTML5"
-  icon="html/html5.svg"
-/>
+    moreClass="absolute"
+    position="top"
+    active={true}
+    name="HTML5"
+    icon="html/html5.svg"
+  />
 </Group>

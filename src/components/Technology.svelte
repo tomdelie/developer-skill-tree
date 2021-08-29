@@ -54,7 +54,6 @@
   onMount(() => {
     tippy(tippyTrigger, {
       allowHTML: true,
-      trigger: "click",
       theme: "custom-dark",
       interactive: true,
       arrow: true,
