@@ -14,7 +14,7 @@
     position="top"
     active={true}
     name="GitHub"
-    icon="control/git.svg"
+    icon="control/github.svg"
   />
   <Technology
     moreClass="absolute"
