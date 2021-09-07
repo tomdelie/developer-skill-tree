@@ -59,19 +59,16 @@
       arrow: true,
       appendTo: document.body,
       content: `
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center">
-              <img src="/images/icons/${icon}" class="filter drop-shadow" width="36" alt="${name}" />
-              <h1 class="text-lg ml-4 font-semibold uppercase" style="color: #bd9e59;">${name}</h1>
-            </div>
-            ${
-              user && repo
-                ? `<iframe src="https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true" frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`
-                : ""
-            }
+        <div class="flex items-center">
+          <div class="flex items-center">
+            <img src="/images/icons/${icon}" class="filter drop-shadow" width="24" alt="${name}" />
+            <h1 class="ml-4 text-white font-semibold uppercase">${name}</h1>
           </div>
-          <span class="text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+          ${
+            user && repo
+              ? `<iframe class="ml-10" src="https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true" frameborder="0" scrolling="0" width="110" height="20" title="GitHub"></iframe>`
+              : ""
+          }
         </div>`,
     });
   });
