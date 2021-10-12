@@ -1,3 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.bg-purple-custom {
+  background-color: #3F35AC;
+}
+
+.border-purple-custom {
+  border-color: #3F35AC;
+}
+
 .tippy-box[data-theme~='custom-dark'] {
   background-color: #1A1338;
   color: #A8A8C4;
