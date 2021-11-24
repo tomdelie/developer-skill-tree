@@ -56,7 +56,7 @@
       allowHTML: true,
       theme: "custom-dark",
       interactive: true,
-      arrow: true,
+      arrow: false,
       appendTo: document.body,
       content: `
         <div class="flex items-center">

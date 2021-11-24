@@ -44,12 +44,23 @@
   <div class="flex justify-between items-center px-4 sm:px-8 py-4 text-center border-b" style="background-color: #140E30; border-color: #251e47; box-shadow: 2px 0 10px 1px #120b32;">
     <div class="hidden sm:block"></div>
     <h1 class="text-xl font-semibold text-white uppercase">Full Stack <span class="text-yellow-400">Developer</span> Skill Tree</h1>
-    <a class="ml-2" href="https://github.com/tomdelie/developer-skill-tree" target="_blank">
-      <img src="/images/icons/control/github.svg" alt="GitHub" width="30" />
+    <a class="ml-2 opacity-90" href="https://github.com/tomdelie/developer-skill-tree" target="_blank">
+      <img src="/images/icons/control/github.svg" alt="GitHub" width="22" />
     </a>
   </div>
 </header>
+
 <main>
+  <div class="flex flex-col p-2 text-white opacity-90 text-sm">
+    <div class="flex items-center">
+      <div class="mr-2 h-2 w-2 ring-2 ring-yellow-300 rounded-full"></div>
+      <span>Learned</span>
+    </div>
+    <div class="flex items-center">
+      <div class="mr-2 h-2 w-2 ring-2 ring-gray-300 rounded-full"></div>
+      <span>Unlearned</span>
+    </div>
+  </div>
   {#if !centered}
     <button class="fixed bottom-6 right-6 z-50 white bg-white bg-white p-2 h-10 w-10 rounded-full shadow" title="Horizontally align tree" on:click={handleResize}>
       <img src="/images/icons/center_focus.svg" width="30" alt="Center focus" />
